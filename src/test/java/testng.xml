@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation Practice">
+    <test name="Shopping Test">
+        <classes>
+            <class name="AutomationPracticeTests">
+                <methods>
+                    <include name="shoppingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Search Test 1">
+        <parameter name="searchOption" value="selenium"/>
+        <classes>
+            <class name="AutomationPracticeTests">
+                <methods>
+                    <include name="parametrizedTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Search Test 2">
+        <parameter name="searchOption" value="web"/>
+        <classes>
+            <class name="AutomationPracticeTests">
+                <methods>
+                    <include name="parametrizedTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Search Test 3">
+        <parameter name="searchOption" value="guide"/>
+        <classes>
+            <class name="AutomationPracticeTests">
+                <methods>
+                    <include name="parametrizedTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,29 @@
+<Configuration status="warn">
+    <!-- Logging Properties -->
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss} [%p] [CLASS: %c{1} ROW: %L] - %m%n</Property>
+        <Property name="LOG_ROOT">target/log-output</Property>
+    </Properties>
+    <Appenders>
+        <!-- Console appender configuration -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="${LOG_PATTERN}" />
+        </Console>
+        <File name="LogToFile" fileName="${LOG_ROOT}/log_file.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="TestLog" level="error" additivity="false">
+            <AppenderRef ref="LogToFile"/>
+        </Logger>
+        <!-- Root logger referring to console appender -->
+        <Root level="info" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="LogToFile" />
+        </Root>
+    </Loggers>
+</Configuration>
