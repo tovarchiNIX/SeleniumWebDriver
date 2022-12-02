@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Automation Practice">
-    <test name="Shopping Test">
-        <classes>
-            <class name="AutomationPracticeTests">
-                <methods>
-                    <include name="shoppingTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="Shopping Test">-->
+<!--        <classes>-->
+<!--            <class name="tests.shopping.ShoppingTest">-->
+<!--                <methods>-->
+<!--                    <include name="shoppingTest"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
     <test name="Search Test 1">
-        <parameter name="searchOption" value="selenium"/>
+        <parameter name="searchQuery" value="selenium"/>
         <classes>
-            <class name="AutomationPracticeTests">
+            <class name="tests.shopping.ShoppingTest">
                 <methods>
                     <include name="parametrizedTest"/>
                 </methods>
@@ -21,9 +21,9 @@
         </classes>
     </test>
     <test name="Search Test 2">
-        <parameter name="searchOption" value="web"/>
+        <parameter name="searchQuery" value="web"/>
         <classes>
-            <class name="AutomationPracticeTests">
+            <class name="tests.shopping.ShoppingTest">
                 <methods>
                     <include name="parametrizedTest"/>
                 </methods>
@@ -31,9 +31,9 @@
         </classes>
     </test>
     <test name="Search Test 3">
-        <parameter name="searchOption" value="guide"/>
+        <parameter name="searchQuery" value="guide"/>
         <classes>
-            <class name="AutomationPracticeTests">
+            <class name="tests.shopping.ShoppingTest">
                 <methods>
                     <include name="parametrizedTest"/>
                 </methods>
