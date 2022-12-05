@@ -1,29 +1,47 @@
 package tests.shopping;
 
+import common.CommonActions;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import tests.base.BaseTest;
+import pages.base.BasePage;
+import pages.shopping.BasketPage;
+import pages.shopping.ProductPage;
+import pages.shopping.SearchResultsPage;
+import pages.shopping.ShoppingPage;
 import static constants.Constants.ProductNames.HTML5_WEBAPP_DEVELOPMENT_PRODUCT_NAME;
 import static constants.Constants.ProductNames.THINKING_IN_HTML_PRODUCT_NAME;
 import static constants.Constants.Urls.*;
+import static constants.Constants.Urls.BASKET_URL;
 
-public class ShoppingTest extends BaseTest {
+public class ShoppingTest {
+    WebDriver driver;
+
+    @BeforeClass
+    public void setup() {
+        driver = CommonActions.createWebDriver();
+    }
 
     @Test(description = "Testing shopping cart functionality")
     public void shoppingTest() {
+        BasePage basePage = new BasePage(driver);
         basePage.openUrl(SHOPPING_URL);
 
         String searchQuery = "html";
+        ShoppingPage shoppingPage = new ShoppingPage(driver);
         shoppingPage
                 .performSearch(searchQuery);
 
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver);
         searchResultsPage
                 .verifyBrowserTabTitle(searchQuery)
                 .verifyEachProductContainsSearchQuery(searchQuery)
                 .verifyEachProductLinkHasHrefAttribute()
                 .verifySearchResultsPageTitle(searchQuery);
 
-        productPage = searchResultsPage.openProductByName(THINKING_IN_HTML_PRODUCT_NAME);
+        ProductPage productPage = searchResultsPage.openProductByName(THINKING_IN_HTML_PRODUCT_NAME);
         productPage
                 .verifyCurrentUrl(THINKING_IN_HTML_URL);
         productPage
@@ -38,7 +56,7 @@ public class ShoppingTest extends BaseTest {
                 .verifyProductNameisDisplayedInSuccessMessage(HTML5_WEBAPP_DEVELOPMENT_PRODUCT_NAME);
 
         String productPrice = productPage.getProductPrice();
-        basketPage = productPage.clickViewBasketButton();
+        BasketPage basketPage = productPage.clickViewBasketButton();
         basketPage.verifyCurrentUrl(BASKET_URL);
 
         String initialQuantity = "1";
@@ -60,9 +78,17 @@ public class ShoppingTest extends BaseTest {
     @Test(description = "Testing search results with parametrization")
     @Parameters("searchQuery")
     public void parametrizedTest(String searchQuery) {
+        BasePage basePage = new BasePage(driver);
         basePage.openUrl(SHOPPING_URL);
-        shoppingPage
-                .performSearch(searchQuery)
-                .verifySearchResultsPageTitle(searchQuery);
+
+        ShoppingPage shoppingPage = new ShoppingPage(driver);
+        shoppingPage.performSearch(searchQuery);
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver);
+        searchResultsPage.verifySearchResultsPageTitle(searchQuery);
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
     }
 }

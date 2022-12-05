@@ -40,13 +40,13 @@ public class ProductPage extends BasePage {
             String productNameText = product.findElement(productLink).findElement(productName).getText();
             if (productNameText.equals(relatedProductToOpen)) {
                 itemIsPresent = true;
-                productToSelect = driver.findElement(productLink).findElement(productName);
+                productToSelect = product;
             }
         }
 
         if (itemIsPresent){
             // This scroll is needed here due to Google Ads overlapping the page content
-            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1000)", "");
+            ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1200)", "");
             productToSelect.click();
         } else {
             logger.error("Unable to find product by given name: " + relatedProductToOpen);
